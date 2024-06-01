@@ -3,9 +3,13 @@ package com.georgyarzhancev.javacore.chapter18;
 import java.util.Properties;
 import java.util.Set;
 
-public class PropDemo {
+public class PropDemoDef {
     public static void main(String[] args) {
-        Properties capitals = new Properties();
+        Properties defList = new Properties();
+        defList.put("Florida", "Tellasy");
+        defList.put("Viskonsin", "Medison");
+
+        Properties capitals = new Properties(defList);
         capitals.put("Illinois", "SpringField");
         capitals.put("Missouri", "Jefferson");
         capitals.put("Washington", "Olimpia");
@@ -21,8 +25,8 @@ public class PropDemo {
                     capitals.getProperty((String) name) + ".");
         System.out.println();
 
-        // find state, not present in the list, setting the value, chosen by default
-        String str = capitals.getProperty("Florida", "not found");
-        System.out.println("Capital of FLorida " + str + ".");
+        // will be found in deflist
+        String str = capitals.getProperty("Florida");
+        System.out.println("Capital of Florida " + str + ".");
     }
 }

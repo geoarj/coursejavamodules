@@ -5,26 +5,35 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-class TComp implements Comparator<String> {
+class CompLastNames implements Comparator<String> {
     // compare last names in both strings
     @Override
     public int compare(String aStr, String bStr) {
-        int i, j, k;
-
+        int i, j;
         // find index of symbol from which starts the last name
         i = aStr.lastIndexOf(' ');
         j = bStr.lastIndexOf(' ');
-        k = aStr.substring(i).compareTo(bStr.substring(j));
-        if (k == 0) // if last names match, check name and last name fully
-            return aStr.compareTo(bStr);
-        else
-            return k;
+        return aStr.substring(i).compareToIgnoreCase(bStr.substring(j));
     }
 }
 
-class TreeMapDemo2 {
+// sort the accounts of holders by Last Name, Name and Father name,
+// if the LNs are equal
+class CompThenByFirstName implements Comparator<String> {
+    public int compare(String aStr, String bStr) {
+        int i, j;
+        return aStr.compareToIgnoreCase(bStr);
+    }
+}
+
+class TreeMapDemo2A {
     public static void main(String[] args) {
-        TreeMap<String, Double> tm = new TreeMap<>(new TComp());
+
+        CompLastNames compLN = new CompLastNames();
+        Comparator<String> compLastThenFirst =
+                compLN.thenComparing(new CompThenByFirstName());
+
+        TreeMap<String, Double> tm = new TreeMap<>(compLastThenFirst);
 
         tm.put("John Dow", 232.4);
         tm.put("Tom Smith", 123.4);

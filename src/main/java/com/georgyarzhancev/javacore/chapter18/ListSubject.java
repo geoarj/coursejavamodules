@@ -1,4 +1,4 @@
-package com.georgyarzhantsev.javacore.chapter18;
+package com.georgyarzhancev.javacore.chapter18;
 
 public class ListSubject {
 
@@ -8,7 +8,7 @@ public class ListSubject {
 //    NullPointerException
 //    IllegalArgumentException
 
-    
+
 
 
 
