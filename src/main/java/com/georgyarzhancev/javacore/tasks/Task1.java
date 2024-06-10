@@ -1,5 +1,7 @@
 package com.georgyarzhancev.javacore.tasks;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /*
@@ -14,6 +16,26 @@ result = [1,2]
 Т.е. индексы 1 и 2 (значение 8 и 15) в сумме дают искомое число 23
  */
 public class Task1 {
+
+    public int[] resultIndexesOfArrayOfSumNew(int[] numbers, int goalSum) {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < numbers.length; i++) {
+            map.put(numbers[i], i);
+        }
+
+        for (int i = 0; i < numbers.length; i++) {
+
+            int amount = goalSum - numbers[i];
+
+
+            if (map.containsKey(amount) && map.get(amount) != i) {
+                return new int[]{map.get(amount), i};
+            }
+        }
+        throw new IllegalArgumentException("No indexes found.");
+    }
+
     public int[] resultIndexesOfArrayOfSum(int[] arrayNums, int goalSum) {
         int i = 0;
         while (i < arrayNums.length - 1) {
@@ -50,7 +72,7 @@ public class Task1 {
 
         int[] result;
         try {
-            result = task1.resultIndexesOfArrayOfSum(arrayNums, goalSum);
+            result = task1.resultIndexesOfArrayOfSumNew(arrayNums, goalSum);
             System.out.println("Result: [" + result[0] + "," + result[1] + "]");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
